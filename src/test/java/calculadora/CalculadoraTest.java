@@ -53,5 +53,22 @@ public class CalculadoraTest {
     }
 
 
+    @Test
+    public void testDiv(){
+        calc.div(5, 2);
+    }
+
+
+    @Test(expected = ArithmeticException.class)
+    public void testDivZero(){
+        calc.div(5, 0);
+    }
+
+
+    @Test(timeout = 250)
+    public void testThisMethodNeedsToWorkFast(){
+        calc.thisMethodNeedToWorkFast();
+    }
+
 
 }
