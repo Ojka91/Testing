@@ -5,6 +5,16 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
+/**
+ *
+ * @Test test methods
+ * @Before try each time before method
+ * @After try each time after method
+ * @AfterClass - @BeforeClass only once before and after everything
+ * @Test(value = AritmethicException) expect that result
+ * @Test(timeout = x) delay on method
+ *
+ */
 
 public class CalculadoraTest {
 

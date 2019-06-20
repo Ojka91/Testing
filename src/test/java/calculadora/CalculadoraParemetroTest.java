@@ -10,7 +10,14 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
+/**
+ *
+ * You can try a lot of different cases for each method
+ * using this annotations saving a lot of code writting
+ * manually each example.
+ * This case try method Add
+ *
+ */
 @RunWith(value = Parameterized.class)
 public class CalculadoraParemetroTest {
 
