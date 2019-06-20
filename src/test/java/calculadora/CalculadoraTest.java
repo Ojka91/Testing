@@ -1,25 +1,36 @@
 package calculadora;
 
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
 
 public class CalculadoraTest {
 
-    Calculadora calc;
+   static Calculadora calc;
 
-    @Before
-    public void before(){
-        System.out.println("before()");
+    @BeforeClass
+    public static void beforeClass(){
+        System.out.println("beforeClass()");
         calc = new Calculadora();
+
+    }
+
+    @AfterClass
+    public static void afterClass(){
+        System.out.println("afterClass()");
     }
 
 
-    @After
+    @Before //each time before test
+    public void before(){
+        System.out.println("before()");
+        calc.clear();
+    }
+
+
+    @After //each time after test
     public void after(){
         System.out.println("after()");
         calc.clear();
