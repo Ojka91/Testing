@@ -44,14 +44,14 @@ public class ItemControllerSolvedTest {
 	}
 
 	/**
-	 * Método para probar la generación de un stub de un método estático que
+	 * Mï¿½todo para probar la generaciï¿½n de un stub de un mï¿½todo estï¿½tico que
 	 * devuelve un valor, haciendo que el mismo devuelva un array distinto al
-	 * que por codificación debería devolver.
+	 * que por codificaciï¿½n deberï¿½a devolver.
 	 * 
 	 * Resultado esperado:
 	 * 
 	 * - Stub invocado. - Array de cadenas con los valores "one", "two",
-	 * "three".
+	 * "three".  
 	 */
 	@Test
 	public void testObtenerItemsDevolviendoUnArrayDistintoAlCodificado() {
@@ -67,12 +67,12 @@ public class ItemControllerSolvedTest {
 	}
 
 	/**
-	 * Método para probar la generación de un stub de un método estático que no
+	 * Mï¿½todo para probar la generaciï¿½n de un stub de un mï¿½todo estï¿½tico que no
 	 * retorna valor, haciendo que el mismo no se ejecute.
 	 * 
 	 * Resultado esperado:
 	 * 
-	 * - Stub invocado. - No se lanza excepción alguna.
+	 * - Stub invocado. - No se lanza excepciï¿½n alguna.
 	 */
 	@Test
 	public void testImprimirItemsEvitandoLanzamientoExcepcion() {
@@ -87,11 +87,11 @@ public class ItemControllerSolvedTest {
 	}
 
 	/**
-	 * Método para probar el mockeo de una clase con un bloque estático.
+	 * Mï¿½todo para probar el mockeo de una clase con un bloque estï¿½tico.
 	 * 
 	 * Resultado esperado:
 	 * 
-	 * - Stub invocado. - No se lanza excepción alguna.
+	 * - Stub invocado. - No se lanza excepciï¿½n alguna.
 	 */
 	@Test
 	public void testSaludarEvitandoLanzamientoExcepcion() {
@@ -106,13 +106,13 @@ public class ItemControllerSolvedTest {
 	}
 
 	/**
-	 * Método para probar la generación de un stub de un método privado que
+	 * Mï¿½todo para probar la generaciï¿½n de un stub de un mï¿½todo privado que
 	 * retorna valor, haciendo que el mismo devuelva un valor distinto al que
-	 * por codificación debería devolver.
+	 * por codificaciï¿½n deberï¿½a devolver.
 	 * 
 	 * Resultado esperado:
 	 * 
-	 * - Stub invocado. - No se lanza excepción alguna.
+	 * - Stub invocado. - No se lanza excepciï¿½n alguna.
 	 */
 	@Test
 	public void testRealizarValidacionSinLanzamientoExcepcion() {
@@ -120,7 +120,7 @@ public class ItemControllerSolvedTest {
 		try {
 			when(itemController, "obtenerEstadoValidacion").thenReturn(Boolean.TRUE);
 		} catch (Exception e) {
-			fail("Se ha lanzado una expeción no esperada generando el stub de un método privado.");
+			fail("Se ha lanzado una expeciï¿½n no esperada generando el stub de un mï¿½todo privado.");
 		}
 		// ACT
 		itemController.realizarValidacion();
@@ -128,17 +128,17 @@ public class ItemControllerSolvedTest {
 		try {
 			verifyPrivate(itemController).invoke("obtenerEstadoValidacion");
 		} catch (Exception e) {
-			fail("Se ha lanzado una expeción no esperada verificando un stub de un método privado.");
+			fail("Se ha lanzado una expeciï¿½n no esperada verificando un stub de un mï¿½todo privado.");
 		}
 	}
 
 	/**
-	 * Método para probar la modificación del valor de un atributo de instancia
-	 * de forma que podamos guiar el flujo de ejecución.
+	 * Mï¿½todo para probar la modificaciï¿½n del valor de un atributo de instancia
+	 * de forma que podamos guiar el flujo de ejecuciï¿½n.
 	 * 
 	 * Resultado esperado:
 	 * 
-	 * - No se lanza excepción alguna.
+	 * - No se lanza excepciï¿½n alguna.
 	 */
 	@Test
 	public void testRealizarValidacionSinLanzamientoExcepcionModificandoInstancia() {
@@ -150,13 +150,13 @@ public class ItemControllerSolvedTest {
 	}
 
 	/**
-	 * Método para probar la modificación de una instanciación de forma que se
-	 * tenga control sobre qué debe generar la misma.
+	 * Mï¿½todo para probar la modificaciï¿½n de una instanciaciï¿½n de forma que se
+	 * tenga control sobre quï¿½ debe generar la misma.
 	 * 
 	 * Resultado esperado:
 	 * 
-	 * - Instanciación ejecutada. - Valor instanciado es el esperado. - No se
-	 * lanza excepción alguna.
+	 * - Instanciaciï¿½n ejecutada. - Valor instanciado es el esperado. - No se
+	 * lanza excepciï¿½n alguna.
 	 */
 	@Test
 	public void testMockeandoInstanciacion() {
@@ -167,9 +167,9 @@ public class ItemControllerSolvedTest {
 		try {
 			whenNew(Date.class).withAnyArguments().thenReturn(formateadorFecha.parse(fechaEsperada));
 		} catch (ParseException e1) {
-			fail("Se ha lanzado una expeción no esperada parseando una fecha.");
+			fail("Se ha lanzado una expeciï¿½n no esperada parseando una fecha.");
 		} catch (Exception e1) {
-			fail("Se ha lanzado una expeción no esperada verificando un stub de una instanciación.");
+			fail("Se ha lanzado una expeciï¿½n no esperada verificando un stub de una instanciaciï¿½n.");
 		}
 		// ACT
 		fechaObtenida = itemController.obtenerFechaComoCadena();
@@ -177,7 +177,7 @@ public class ItemControllerSolvedTest {
 		try {
 			verifyNew(Date.class).withNoArguments();
 		} catch (Exception e) {
-			fail("Se ha lanzado una expeción no esperada verificando un stub de una instanciación.");
+			fail("Se ha lanzado una expeciï¿½n no esperada verificando un stub de una instanciaciï¿½n.");
 		}
 		assertThat(fechaObtenida, is(fechaEsperada));
 	}
