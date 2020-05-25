@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>ejerciciosTest</display-name>
+	
+	<!-- 
+		******************************************************
+		Definicion de los parametros de contexto 
+		******************************************************	
+	-->
+	<!-- Contexto de Spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/spring/web.application.context.xml</param-value>
+	</context-param>
+	
+	<!-- Clase para obtener el entorno en el que se trabaja y definir el profile de Spring -->
+	<context-param>
+		<param-name>contextInitializerClasses</param-name>
+		<param-value>com.iberdrola.framework.profiles.ProfilesContextInitializer</param-value>
+	</context-param>
+
+	<!-- 
+		******************************************************
+		Definicion de los filtros
+		******************************************************	
+	-->
+	<!-- 1. Seguridad Spring -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<!-- 1. Seguridad Spring -->
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 
+		******************************************************
+		Definicion de los listeners
+		******************************************************	
+	-->
+	<!-- Listener para integrar el contexto de Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 
+		******************************************************
+		Definicion de los Servlets
+		******************************************************	
+	-->
+	<!-- Spring MVC -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<!-- Mapeo del controller de Spring MVC -->
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.action</url-pattern>
+		<url-pattern>*.ajax</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 
+		******************************************************
+		Timeout
+		******************************************************	
+	-->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+</web-app>

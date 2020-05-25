@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- Indicamos que queremos el control por anotaciones y añadimos los conversores -->
+	<beans:bean id="editableValidator" class="org.hdiv.web.validator.EditableParameterValidator"/>
+	<annotation-driven conversion-service="conversionService" validator="editableValidator" />
+
+	<!-- Se añaden todos los conversores y formateadores -->
+	<beans:bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	</beans:bean>
+	
+	<!-- Se indica a partir de qué paquete se obtendrán todos los controladores -->
+	<context:component-scan base-package="com.insags">
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
+
+	<!-- Configuración de tiles -->
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles-def.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- Configuración del Resolver para gestionar las vistas -->
+	<beans:bean 
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="0" />
+	</beans:bean>
+	
+	<beans:bean id="viewResolver"
+	      class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+	      <beans:property name="order" value="1" />
+    </beans:bean>
+	
+	<!-- Resolver la internacionalización -->
+	<beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<beans:property name="defaultLocale" value="es"/>
+	</beans:bean>
+	
+	<!-- Resolver para la subida de ficheros -->
+	<beans:bean id="multipartResolver"
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <!-- one of the properties available; the maximum file size in bytes -->
+	    <beans:property name="maxUploadSize" value="20971520"/><!-- 20MB por archivo -->
+	</beans:bean>	
+	
+	<!-- Interceptor para el cambio de locale -->
+	
+	<interceptors>
+		
+		<!-- Interceptor para el cambio de idioma -->
+		<interceptor>
+			<mapping path="/i18n/cambiarIdioma.action"/>
+			<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<!-- Indicamos el nombre del parámetro donde vendrá especificado el locale -->
+				<beans:property name="paramName" value="locale"/>
+			</beans:bean>
+		</interceptor>
+	</interceptors>
+
+	<!-- Declaración de AOP para interceptores de negocio. Esto es necesario 
+		declararlo en el contexto web, ya que si se declara en el contexto de negocio 
+		no funciona -->
+	<aop:aspectj-autoproxy/>
+	
+	<!-- Controller que redirige a la home -->
+	<view-controller path="/home.action" view-name="redirigir/pagina/bienvenidaLimpiar.action" />
+	
+</beans:beans>

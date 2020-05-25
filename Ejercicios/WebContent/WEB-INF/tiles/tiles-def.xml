@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+	<!--
+		***********************************************************************
+		Plantillas de la aplicacion
+		***********************************************************************
+	-->
+	
+	<!-- Plantilla base para las páginas -->
+	<definition name=".base" template="/jsp/framework/plantillas/base.jsp">
+		<put-attribute name="head"		value="/jsp/framework/tiles/head.jsp" />
+		<put-attribute name="cabecera"	value="/jsp/framework/tiles/cabecera.jsp" />
+		<put-attribute name="menu"		value="/jsp/framework/tiles/menu.jsp" />
+		<put-attribute name="contenido"	value="" />
+		<put-attribute name="pie"		value="/jsp/framework/tiles/pie.jsp" />
+		<put-list-attribute name="ficherosJs"/>
+		<put-list-attribute name="ficherosCss"/>
+	</definition>
+	
+	<!-- Plantilla para las páginas de error -->
+	<definition name=".error" template="/jsp/framework/plantillas/error.jsp">
+		<put-attribute name="head"		value="/jsp/framework/tiles/head.jsp" />
+		<put-attribute name="menu"		value="/jsp/framework/tiles/menu.jsp" />
+		<put-attribute name="cabecera"	value="/jsp/framework/tiles/cabecera.jsp" />
+		<put-attribute name="contenido"	value="" />
+		<put-attribute name="pie"		value="/jsp/framework/tiles/pie.jsp" />
+		<put-list-attribute name="ficherosJs"/>
+		<put-list-attribute name="ficherosCss"/>
+	</definition>
+	
+	<!-- Plantilla para las ventanas popup -->
+	<definition name=".popup" template="/jsp/framework/plantillas/popup.jsp">
+		<put-attribute name="contenido" value="" />
+		<put-list-attribute name="ficherosJs"/>
+	</definition>
+
+	<!--
+		***********************************************************************
+		Páginas de error
+		***********************************************************************
+	-->
+	
+	<definition name="400" extends=".error">
+		<put-attribute name="errorCode" value="400" />
+		<put-attribute  name="contenido" value="/jsp/framework/error/400.jsp"/>
+	</definition>
+	
+	<definition name="403" extends=".error">
+		<put-attribute name="errorCode" value="403" />
+		<put-attribute name="contenido" value="/jsp/framework/error/403.jsp"/>
+	</definition>
+	
+	<definition name="404" extends=".error">
+		<put-attribute name="errorCode" value="404" />
+		<put-attribute name="contenido" value="/jsp/framework/error/404.jsp"/>
+	</definition>
+	
+	<definition name="405" extends=".error">
+		<put-attribute name="errorCode" value="405" />
+		<put-attribute name="contenido" value="/jsp/framework/error/405.jsp"/>
+	</definition>
+	
+	<definition name="500" extends=".error">
+		<put-attribute name="errorCode" value="500" />
+		<put-attribute name="contenido" value="/jsp/framework/error/500.jsp"/>
+	</definition>
+	
+</tiles-definitions>

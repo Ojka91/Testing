@@ -1,0 +1,68 @@
+EJERCICIOS FINALES:
+Ejercicios Test Unitarios (Servicios):
+	
+	1.- Crear una clase de test unitarios para testear el servicio UsuarioService.
+	
+	
+	2.- Hacer los test unitarios necesarios para testear el método UsuarioService.cargaInicialMantenimiento verificando:
+			a) Caso Extremo: Comportamiento ante errores: 
+					* ¿Cómo se debe comportar el método si se producen errores del mismo? Simular que desde dentro del método se lanzan excepciones.
+			
+			b) Caso Óptimo: Codificar el test necesario para verificar:
+					* Que se ha llamado exactamente las veces necesarias al método servicioCargaCombos.buscar
+					* Como resultado esperado que:
+						# cargaInicialMantenimientoUsuariosDto.departamentos contiene los siguientes departamentos:
+							+ ComboDto-> 1, Departamento 1
+							+ ComboDto-> 2, Departamento 2
+						
+						# cargaInicialMantenimientoUsuariosDto.roles contiene los siguientes roles:
+							+ ComboDto-> 1, Rol 1
+							+ ComboDto-> 2, Rol 2							
+							+ ComboDto-> 3, Rol 3
+							
+			c) ¿Qué pasaría si lanzo un Mutation Test del método anterior y porqué?
+					a) Nuestros test fallarían al hacer la mutación del código, puesto que con las verificaciones que tenemos cubrirían todos los casos posibles. Es lo que se espera al lanzar un Mutation Test.
+					b) Nuestros test seguirían funcionando, ya que las verificaciones que tenemos no prueban todos los valores posibles devueltos. Es lo esperado para un Mutation Test.
+					c) No pasaría nada, ya que no es posible someter a un Mutation Test las clases de servicio.
+					d) Todas las anteriores.
+			
+			
+	3.- Hacer los test unitarios necesarios para testear el método UsuarioService.insertar verificando:
+			a) Caso Extremo: Comportamiento ante errores: 
+					* ¿Cómo se debe comportar el método si se producen errores del mismo? 
+						 - Si se produce un error de conexión con Filenet, nuestro método debería lanzar una FilenetException con el mensaje: "Se ha producido un error al conectar con Filenet". Codificar lo necesario para que así sea.
+						 - Si se produce un error al crear la carpeta en Filenet, nuestro método debería lanzar una FilenetException con el mensaje: "Se ha producido un error al crear la carpeta del usuario en Filenet". Codificar lo necesario para que así sea.
+						 - Si se produce un error al desconectar de Filenet, nuestro método debería lanzar una FilenetException con el mensaje: "Se ha producido un error al desconectar de Filenet". Codificar lo necesario para que así sea.
+							
+			b) Caso Óptimo: 
+					¿Qué debería hacer para testear la asociación del usuario de auditoría?
+						a) Hacer un mock para el obtener el objeto de autenticación (Authentication), después hacer un mock para obtener los datos adicionales.
+						b) Refactorizar el método, sacando a un método privado aparte las líneas necesarias para obtener el usuario autenticado y poder asociarlo así contribuyo a la legibilidad del código. Después de eso, haré un mock del método privado.
+						c) Sacar a una clase de utilería la obtención del usuario autenticado, ya que lo voy a usar en más sitios de la aplicación así contribuyo a la legibilidad del código. Después, haré un mock del método estático.
+						
+					* En función de la opción elegida en el paso anterior, verificar que: 
+						- Al usuario se le ha asignado el idRegistro = 77.
+						- Al usuario se le ha creado una carpeta en filenet.
+						- Al usuario se le ha asociado un usuario de auditoría con los siguientes datos:
+							* idRegistro = 33
+							* codigo = 4285
+---------------------------------------------------------------------------------------------------------------------------							
+Ejercicios Test Unitarios de Componentes (Controllers):	
+	
+	1.- Crear una clase de test de integración para testear el el controller UsuarioController que herede de BaseTestIntegracion.
+	
+	
+	2.- Crear un test de integración del método UsuarioController.insertar:
+			Pasos previos:
+				3.1.- Identificar la url para invocar al método correspondiente.
+				3.2.- Identificar el tipo de petición GET/POST.
+				3.3.- Al ser un Test Unitario de Componentes desde Controller, hay que hacer mocks para la conexión con sistemas externos, en nuestro caso, todas las llamadas a Filenet. Las de las BBDD las consideramos sistemas propios, por lo que no deberían de realizarse mocks.
+				
+			a) Invocar a la url pasándole los parámetros:
+					- nombre = "Nombre del usuario"
+					- apellidos = "Apellidos del usuario"
+					- fechaNacimiento = "01/01/2000" (una fecha válida)
+				El resultado esperado será:	
+					- No lanzará ningún tipo de excepción.
+					- El estado HTTP será el 200 (OK)
+					- Verificar que el usuario que nos devuelve tiene un idRegistro.
